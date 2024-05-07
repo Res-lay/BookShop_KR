@@ -1,6 +1,5 @@
 package org.example.kr_backend.models;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,15 +11,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ShoppingCartItem {
+public class PurchaseItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @ManyToOne
-    @JoinColumn(name = "book_id")
     private Book book;
-
     private Integer quantity;
-
 }

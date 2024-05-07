@@ -2,6 +2,7 @@ import MyNavbar from "../components/MyNavbar";
 import Cart from "../components/Cart";
 import {useEffect, useState} from "react";
 import NotAuthenticatedMessage from "../components/Errors/NotAuthenticatedMessage";
+import Footer from "../components/Footer";
 
 export default function CartPage(){
 
@@ -20,7 +21,7 @@ export default function CartPage(){
             ) : (
                 <NotAuthenticatedMessage/>
             )}
-
+            <Footer />
         </div>
     );
 }

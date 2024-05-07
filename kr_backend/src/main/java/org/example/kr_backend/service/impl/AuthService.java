@@ -1,5 +1,6 @@
 package org.example.kr_backend.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.example.kr_backend.models.AuthResponse;
 import org.example.kr_backend.models.User;
 import org.example.kr_backend.models.dto.UserDto;
@@ -11,21 +12,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class AuthService {
     private final UserRepo userRepo;
     private final UserServiceImpl userService;
     private final JwtService jwtService;
     private final DtoConverter dtoConverter;
     private final AuthenticationManager authenticationManager;
-
-    public AuthService(UserRepo userRepo, UserServiceImpl userService,
-                       JwtService jwtService, DtoConverter dtoConverter, AuthenticationManager authenticationManager) {
-        this.userRepo = userRepo;
-        this.userService = userService;
-        this.jwtService = jwtService;
-        this.dtoConverter = dtoConverter;
-        this.authenticationManager = authenticationManager;
-    }
 
     public AuthResponse register(User request){
         if (userRepo.findByEmail(request.getEmail()).isPresent()){
@@ -51,9 +44,5 @@ public class AuthService {
         UserDto userDto = dtoConverter.toUserDto(user);
 
         return new AuthResponse(jwt, "User login was successful", userDto);
-    }
-
-    // To save token in repo - mb later
-    private void saveUserToken(String jwt, User user){
     }
 }

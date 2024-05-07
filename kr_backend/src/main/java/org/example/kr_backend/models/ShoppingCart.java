@@ -1,16 +1,14 @@
 package org.example.kr_backend.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class ShoppingCart {
     @Id
@@ -21,9 +19,5 @@ public class ShoppingCart {
     private List<ShoppingCartItem> items;
 
     private Long userId;
-
-    public ShoppingCart() {
-
-    }
 }
 

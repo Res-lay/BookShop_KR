@@ -26,6 +26,12 @@ public class BookController{
         List<Book> books = bookServiceImpl.getAll();
         return ResponseEntity.ok(books);
     }
+    @GetMapping("/get-recommended")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<List<Book>> getRecommendedBooks(){
+        List<Book> books = bookServiceImpl.getRecommendedBooks();
+        return ResponseEntity.ok(books);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable Long id){

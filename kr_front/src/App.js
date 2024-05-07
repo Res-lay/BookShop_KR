@@ -7,6 +7,8 @@ import BookPage from "./pages/BookPage";
 import CartPage from "./pages/CartPage";
 import AdminPanel from "./pages/AdminPanel";
 import {checkAdminAccess} from "./utils/authUtils";
+import BooksPage from "./pages/BooksPage";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
 
@@ -18,6 +20,14 @@ function App() {
         {
             path: "/profile",
             element: <ProfilePage></ProfilePage>
+        },
+        {
+            path:"/books",
+            element: <BooksPage />
+        },
+        {
+            path:"/about-us",
+            element: <AboutUs />
         },
         {
             path: "/book/:id",

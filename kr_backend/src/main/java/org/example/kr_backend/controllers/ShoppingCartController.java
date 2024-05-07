@@ -1,5 +1,6 @@
 package org.example.kr_backend.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.example.kr_backend.models.User;
 import org.example.kr_backend.service.impl.ShoppingCartService;
 import org.example.kr_backend.service.impl.UserServiceImpl;
@@ -10,15 +11,12 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/v1/shopping-cart")
+@RequiredArgsConstructor
 public class ShoppingCartController {
 
     private final ShoppingCartService cartService;
     private final UserServiceImpl userService;
 
-    public ShoppingCartController(ShoppingCartService cartService, UserServiceImpl userService) {
-        this.cartService = cartService;
-        this.userService = userService;
-    }
 
     @PostMapping("/item/add/{id}")
     public ResponseEntity<?> addToCart(@PathVariable Long id, Principal principal){

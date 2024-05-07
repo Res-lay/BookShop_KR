@@ -10,20 +10,18 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
-    protected User(){
-
-    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(unique = true)
     private String email;
-
     private String name;
     private String surname;
     private String password;
     private String roles;
+    @OneToOne
+    private ShoppingCart shoppingCart;
 }

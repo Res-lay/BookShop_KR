@@ -3,9 +3,8 @@ import {Card, CardBody, Tab, Tabs} from "@nextui-org/react";
 export default function DeliveryTypeTabs() {
     return (
         <div>
-            <p className="text-xl text-bold">Delivery</p>
             <Tabs aria-label="Options" color="secondary">
-                <Tab key="photos" title="Courier">
+                <Tab key="courirer" title="Courier">
                     <Card>
                         <CardBody>
                             Courier delivery provides you with convenience and reliability, allowing you to receive your
@@ -16,7 +15,7 @@ export default function DeliveryTypeTabs() {
                         </CardBody>
                     </Card>
                 </Tab>
-                <Tab key="music" title="Pick-up point">
+                <Tab key="pick-up point" title="Pick-up point">
                     <Card>
                         <CardBody>
                             Delivery to the pick-up point provides you with flexibility and convenience, allowing you to
@@ -25,13 +24,6 @@ export default function DeliveryTypeTabs() {
                         </CardBody>
                     </Card>
                 </Tab>
-                {/*<Tab key="videos" title="Videos">*/}
-                {/*    <Card>*/}
-                {/*        <CardBody>*/}
-                {/*            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.*/}
-                {/*        </CardBody>*/}
-                {/*    </Card>*/}
-                {/*</Tab>*/}
             </Tabs>
         </div>
 

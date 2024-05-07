@@ -45,8 +45,7 @@ export default function MyNavbar() {
     ]
 
     return (
-        <Navbar onMenuOpenChange={setIsMenuOpen}>
-
+        <Navbar onMenuOpenChange={setIsMenuOpen} >
             <NavbarContent>
                 <NavbarMenuToggle className="flex sm:hidden"></NavbarMenuToggle>
                 <NavbarBrand>
@@ -65,8 +64,8 @@ export default function MyNavbar() {
                     </NavLink>
                 </NavbarItem>
                 <NavbarItem>
-                    <NavLink color="foreground" to="#">
-                        Integrations
+                    <NavLink color="foreground" to="/about-us">
+                        About Us
                     </NavLink>
                 </NavbarItem>
             </NavbarContent>

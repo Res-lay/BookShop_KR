@@ -36,18 +36,10 @@ export default function UserDropdown({onLogout}) {
                         <p className="font-bold">{user?.email}</p>
                     </DropdownItem>
                     <DropdownItem key="settings">
-                        My Settings
+                        <NavLink to={"/profile"}>Profile</NavLink>
                     </DropdownItem>
                     <DropdownItem key="team_settings">
                         <NavLink to={"/cart"}>Cart</NavLink>
-                    </DropdownItem>
-                    <DropdownItem key="analytics">
-                        Analytics
-                    </DropdownItem>
-                    <DropdownItem key="system">System</DropdownItem>
-                    <DropdownItem key="configurations">Configurations</DropdownItem>
-                    <DropdownItem key="help_and_feedback">
-                        Help & Feedback
                     </DropdownItem>
                     <DropdownItem key="logout" color="danger" onClick={handleLogout}>
                         Log Out

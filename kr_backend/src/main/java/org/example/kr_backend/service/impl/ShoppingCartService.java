@@ -1,5 +1,6 @@
 package org.example.kr_backend.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.example.kr_backend.models.Book;
 import org.example.kr_backend.models.ShoppingCart;
 import org.example.kr_backend.models.ShoppingCartItem;
@@ -9,20 +10,15 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ShoppingCartService implements org.example.kr_backend.service.ShoppingCartService {
 
     private final ShoppingCartRepo shoppingCartRepo;
     private final ShoppingCartItemServiceImpl cartItemService;
     private final BookServiceImpl bookService;
-
-    public ShoppingCartService(ShoppingCartRepo cartRepo, ShoppingCartItemServiceImpl cartItemService, BookServiceImpl bookService) {
-        this.shoppingCartRepo = cartRepo;
-        this.cartItemService = cartItemService;
-        this.bookService = bookService;
-    }
-
 
     @Override
     public void addItemToCart(Long userId, Long bookId) {
@@ -93,5 +89,21 @@ public class ShoppingCartService implements org.example.kr_backend.service.Shopp
             }
             shoppingCartRepo.save(shoppingCart);
         }
+    }
+
+    @Override
+    public ShoppingCart getByUserId(Long userId) {
+        return shoppingCartRepo.findByUserId(userId);
+    }
+
+    @Override
+    public void deleteAllItems(Long id) {
+        Optional<ShoppingCart> entityFromBd = shoppingCartRepo.findById(id);
+        if (entityFromBd.isPresent()){
+            ShoppingCart shoppingCart = entityFromBd.get();
+            shoppingCart.getItems().clear();
+            shoppingCartRepo.save(shoppingCart);
+        }
+
     }
 }

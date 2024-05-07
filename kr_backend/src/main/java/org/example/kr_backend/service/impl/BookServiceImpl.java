@@ -16,6 +16,11 @@ public class BookServiceImpl implements crudService<Book> {
         this.bookRepo = bookRepo;
     }
 
+    public List<Book> getRecommendedBooks(){
+        List<Long> booksId = bookRepo.getRecommendedBooks();
+        return bookRepo.findAllById(booksId);
+    }
+
     @Override
     public List<Book> getAll() {
         return bookRepo.findAll();
