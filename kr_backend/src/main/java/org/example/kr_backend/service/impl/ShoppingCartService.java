@@ -84,6 +84,7 @@ public class ShoppingCartService implements org.example.kr_backend.service.Shopp
                     .filter(item -> item.getBook().getId() == book.getId())
                     .findFirst().orElse(null);
             if (cartItem != null) {
+                bookService.increaseQuantity(book.getId(), cartItem.getQuantity());
                 shoppingCart.getItems().remove(cartItem);
                 cartItemService.deleteByID(cartItem.getId());
             }
@@ -105,5 +106,10 @@ public class ShoppingCartService implements org.example.kr_backend.service.Shopp
             shoppingCartRepo.save(shoppingCart);
         }
 
+    }
+
+    @Override
+    public void createCart(ShoppingCart cart) {
+        shoppingCartRepo.save(cart);
     }
 }

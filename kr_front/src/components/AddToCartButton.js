@@ -14,9 +14,12 @@ export default function AddToCartButton({book}) {
 
     const handleClick = () => {
         axiosInstance.post(`/item/add/${book.id}`)
-            .then(response => console.log(response))
-            .catch(error => console.error(error));
-        toast.success("Book successfully added to cart");
+            .then(response => {
+                console.log(response);
+                toast.success("Book successfully added to cart");
+            })
+            .catch(error => toast.error("The product is out of stock"));
+
     };
 
     return (

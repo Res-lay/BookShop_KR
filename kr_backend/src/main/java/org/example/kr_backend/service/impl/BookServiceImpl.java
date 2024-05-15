@@ -5,7 +5,9 @@ import org.example.kr_backend.repos.BookRepo;
 import org.example.kr_backend.service.crudService;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements crudService<Book> {
@@ -19,6 +21,22 @@ public class BookServiceImpl implements crudService<Book> {
     public List<Book> getRecommendedBooks(){
         List<Long> booksId = bookRepo.getRecommendedBooks();
         return bookRepo.findAllById(booksId);
+    }
+
+    public boolean reduceQuantityById(Long id){
+        Book book = bookRepo.findById(id).orElseThrow();
+        if (book.getQuantity() == 0)
+            return false;
+        book.setQuantity(book.getQuantity() - 1);
+        bookRepo.save(book);
+        return true;
+    }
+
+    public void increaseQuantity(Long id, int amount){
+        Optional<Book> bookOptional = bookRepo.findById(id);
+        Book book = bookOptional.get();
+        book.setQuantity(book.getQuantity() + amount);
+        bookRepo.save(book);
     }
 
     @Override

@@ -3,6 +3,7 @@ import Cart from "../components/Cart";
 import {useEffect, useState} from "react";
 import NotAuthenticatedMessage from "../components/Errors/NotAuthenticatedMessage";
 import Footer from "../components/Footer";
+import {Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader} from "@nextui-org/react";
 
 export default function CartPage(){
 
