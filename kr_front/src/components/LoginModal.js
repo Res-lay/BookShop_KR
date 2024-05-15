@@ -55,7 +55,7 @@ export default function LoginModal({onLogin}) {
                 onOpenChange={onOpenChange}
                 placement="top-center"
                 backdrop={"blur"}
-                className="bg-primary-50"
+                className="bg-primary-50 w-50 sm:w-8/12"
                 motionProps={{
                     variants: {
                         enter: {

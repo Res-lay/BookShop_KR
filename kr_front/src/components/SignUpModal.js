@@ -16,38 +16,25 @@ import axios from "axios";
 export default function SignUpModal() {
 
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
-    const [password, setPassword] = useState("");
-    const [invalidEmail, setInvalidEmail] = useState(false);
-    const [invalidPassword, setInvalidPassword] = useState(false);
-    const [userDetails, setUserDetails] = useState({email: '', password: ''});
+    const [userDetails, setUserDetails] = useState({
+        email: '',
+        password: '',
+        name: '',
+        surname: ''
+    });
 
     const validateEmail = (emailValue) => emailValue.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
     const validatePassword = (passwordValue1, passwordValue2) => passwordValue1 === passwordValue2;
 
-    const handlePasswordChange = (event) => {
-        setPassword(event.value);
-        if (validatePassword(userDetails.password, password)) {
-            setInvalidPassword(false);
-        } else {
-            setInvalidPassword(true);
-        }
-    }
-
     const handleChange = (event) => {
-        const {name, value} = event.target;
-        console.log(event.target);
-        if (event.target.type === 'text') {
-            if (validateEmail(value)) {
-                setInvalidEmail(false);
-            } else {
-                setInvalidEmail(true);
-                setInvalidEmail(true);  
-            }
-            setUserDetails({...userDetails, [name]: value});
-        }
+        const { name, value } = event.target;
+        setUserDetails({
+            ...userDetails, [name] : value,
+        });
     }
 
         const onClickEvent = () => {
+            console.log(userDetails);
             axios.post("http://localhost:8082/api/v1/registration", userDetails)
                 .then(response => console.log(response.data))
                 .catch(error => console.error(error));
@@ -63,7 +50,7 @@ export default function SignUpModal() {
                     onOpenChange={onOpenChange}
                     placement="center"
                     backdrop={"blur"}
-                    className="bg-primary-50"
+                    className="bg-primary-50 w-50 sm:w-8/12"
                     motionProps={{
                         variants: {
                             enter: {
@@ -91,14 +78,30 @@ export default function SignUpModal() {
                                 <ModalHeader className="flex flex-col gap-1">Sing Up</ModalHeader>
                                 <ModalBody>
                                     <Input
+                                        value={userDetails.name}
+                                        onChange={handleChange}
+                                        placeholder="Name"
+                                        name="name"
+                                        type="text"
+                                        variant="bordered"
+                                    />
+                                    <Input
+                                        value={userDetails.surname}
+                                        onChange={handleChange}
+                                        placeholder="Surname"
+                                        name="surname"
+                                        type="text"
+                                        variant="bordered"
+                                    />
+                                    <Input
                                         autoFocus
                                         startContent={
                                             <MailIcon
                                                 className="text-2xl text-default-400 pointer-events-none flex-shrink-0"/>
                                         }
-                                        isInvalid={invalidEmail}
-                                        color={invalidEmail ? "danger" : "success"}
                                         onChange={handleChange}
+                                        value={userDetails.email}
+                                        name="email"
                                         placeholder="you@example.com"
                                         variant="bordered"
                                     />
@@ -107,23 +110,11 @@ export default function SignUpModal() {
                                             <LockIcon
                                                 className="text-2xl text-default-400 pointer-events-none flex-shrink-0"/>
                                         }
-                                        isInvalid={invalidPassword}
                                         onChange={handleChange}
+                                        value={userDetails.password}
                                         placeholder="Enter your password"
                                         type="password"
-                                        variant="bordered"
-                                    />
-                                    <Input
-                                        startContent={
-                                            <LockIcon
-                                                className="text-2xl text-default-400 pointer-events-none flex-shrink-0"/>
-                                        }
-                                        value={password}
-                                        onValueChange={handlePasswordChange}
-                                        isInvalid={invalidPassword}
-                                        errorMessage={invalidPassword && "Passwords don't match"}
-                                        placeholder="Confirm your password"
-                                        type="password"
+                                        name="password"
                                         variant="bordered"
                                     />
 

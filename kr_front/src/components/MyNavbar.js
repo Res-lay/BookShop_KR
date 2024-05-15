@@ -13,6 +13,7 @@ import {NavLink} from "react-router-dom";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignUpModal";
 import UserDropdown from "./UserDropdown";
+import MyNavLink from "./MyNavLink";
 
 export default function MyNavbar() {
 
@@ -32,7 +33,7 @@ export default function MyNavbar() {
     const handleLogout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        window.location.href='/';
+        window.location.href = '/';
         setToken(null);
     };
 
@@ -45,7 +46,7 @@ export default function MyNavbar() {
     ]
 
     return (
-        <Navbar onMenuOpenChange={setIsMenuOpen} >
+        <Navbar onMenuOpenChange={setIsMenuOpen}>
             <NavbarContent>
                 <NavbarMenuToggle className="flex sm:hidden"></NavbarMenuToggle>
                 <NavbarBrand>
@@ -69,11 +70,11 @@ export default function MyNavbar() {
                     </NavLink>
                 </NavbarItem>
             </NavbarContent>
-            {token === null ? <NavbarContent justify="end">
-                    <NavbarItem >
+            {token === null ? <NavbarContent justify="end" className="hidden sm:flex">
+                    <NavbarItem>
                         <LoginModal onLogin={handleLogin}/>
                     </NavbarItem>
-                    <NavbarItem className="hidden lg:flex">
+                    <NavbarItem>
                         <SignUpModal/>
                     </NavbarItem>
                 </NavbarContent> :
@@ -81,20 +82,29 @@ export default function MyNavbar() {
             }
 
             <NavbarMenu>
-                {menuItems.map((item, index) => (
-                    <NavbarMenuItem key={`${item}-${index}`}>
-                        <Link
-                            color={
-                                index === 0 ? "secondary" : index === 3 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
-                            }
-                            className="w-full"
-                            href="#"
-                            size="lg"
-                        >
-                            {item}
-                        </Link>
-                    </NavbarMenuItem>
-                ))}
+                <NavbarMenuItem>
+                    <MyNavLink link={"/books"} color={"default"} text={"Shop"}></MyNavLink>
+                </NavbarMenuItem>
+                <NavbarMenuItem>
+                    <MyNavLink link={"/"} color={"default"} text={"Home"}></MyNavLink>
+                </NavbarMenuItem>
+                <NavbarMenuItem>
+                    <MyNavLink link={"/about-us"} color={"default"} text={"About us"}></MyNavLink>
+                </NavbarMenuItem>
+                {token ?
+                    <></>
+                    :
+                    <>
+                        <NavbarMenuItem>
+                            <SignUpModal/>
+                            {/*<MyNavLink color={"secondary"} text={"Sign up"}></MyNavLink>*/}
+                        </NavbarMenuItem>
+                        <NavbarMenuItem>
+                            <LoginModal onLogin={handleLogin}/>
+                            {/*<MyNavLink color={"secondary"} text={"Login"}></MyNavLink>*/}
+                        </NavbarMenuItem>
+                    </>
+                }
             </NavbarMenu>
         </Navbar>
     );

@@ -1,5 +1,7 @@
 package org.example.kr_backend.controllers;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.kr_backend.models.AuthResponse;
 import org.example.kr_backend.models.User;
 import org.example.kr_backend.service.impl.AuthService;
@@ -13,13 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1")
+@RequiredArgsConstructor
+@Slf4j
 public class AuthenticationController {
 
     private final AuthService authService;
-
-    public AuthenticationController(UserServiceImpl userService, AuthService authService) {
-        this.authService = authService;
-    }
 
 
     @PostMapping("/registration")
@@ -29,6 +29,7 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody User user){
+        log.info("form controller");
         return ResponseEntity.ok(authService.login(user));
     }
 }

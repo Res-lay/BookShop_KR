@@ -30,8 +30,11 @@ public class UserServiceImpl implements crudService<User> {
 
     @Override
     public User create(User user) {
-        User newUser = User.builder().email(user.getEmail())
+        User newUser = User.builder()
+                .email(user.getEmail())
                 .password(passwordEncoder.encode(user.getPassword()))
+                .name(user.getName())
+                .surname(user.getSurname())
                 .roles("ROLE_USER")
                 .build();
         return userRepo.save(newUser);
